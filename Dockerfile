@@ -1,5 +1,8 @@
 FROM golang:1.15-alpine
 
+# Connect repository to image
+LABEL org.opencontainers.image.source=https://github.com/mbishram/a433-microservices
+
 WORKDIR /go/src/github.com/dicodingacademy/karsajobs
 ENV GO111MODULE=on
 ENV APP_PORT=8080

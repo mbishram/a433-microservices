@@ -29,6 +29,7 @@ spec:
               value: "8080"
             - name: MONGO_HOST
               value: $(MONGO_SERVICE_SERVICE_HOST)
+              #value: localhost # Using docker desktop k8s. NOTE: Headless service doesn't work on local, I'm not sure why
             - name: MONGO_USER
               valueFrom:
                 secretKeyRef:

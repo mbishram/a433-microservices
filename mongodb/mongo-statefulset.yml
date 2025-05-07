@@ -47,4 +47,3 @@ spec:
         - name: mongo-secret
           secret:
             secretName: mongo-secret
-

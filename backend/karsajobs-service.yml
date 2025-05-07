@@ -13,4 +13,5 @@ spec:
   ports:
     - port: 8080
       targetPort: karsajobs
+      nodePort: 30001
   type: NodePort

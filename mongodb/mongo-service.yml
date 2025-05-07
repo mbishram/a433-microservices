@@ -13,4 +13,4 @@ spec:
   ports:
     - port: 27017
       targetPort: mongo
-  clusterIP: None
+  clusterIP: None # Headless service. NOTE: It doesn't work on local. While using docker desktop k8s, trying to access them on localhost:27017 doesn't work.

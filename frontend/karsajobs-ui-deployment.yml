@@ -27,3 +27,4 @@ spec:
           env:
             - name: VUE_APP_BACKEND
               value: http://$(KARSAJOBS_SERVICE_SERVICE_HOST):$(KARSAJOBS_SERVICE_SERVICE_PORT)
+              #value: http://localhost:30001 # Using "localhost:NodePort" of docker desktop k8s

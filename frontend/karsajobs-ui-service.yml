@@ -13,4 +13,5 @@ spec:
   ports:
     - port: 8000
       targetPort: karsajobs-ui
+      nodePort: 30002
   type: NodePort

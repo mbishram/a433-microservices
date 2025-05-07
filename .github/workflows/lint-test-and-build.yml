@@ -13,6 +13,7 @@ jobs:
   test-app:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
           go-version: '1.21.x'
@@ -22,4 +23,5 @@ jobs:
     env:
       CR_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
+      - uses: actions/checkout@v4
       - run: bash build_push_image_karsajobs.sh

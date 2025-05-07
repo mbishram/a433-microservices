@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: karsajobs-ui-service
+  namespace: karsajobs
+  labels:
+    app: karsajobs
+    tier: frontend
+spec:
+  selector:
+    app: karsajobs
+    tier: frontend
+  ports:
+    - port: 8000
+      targetPort: karsajobs-ui
+  type: NodePort

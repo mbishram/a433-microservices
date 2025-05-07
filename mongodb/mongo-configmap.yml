@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-config
+  namespace: karsajobs
+  labels:
+    app: karsajobs
+    tier: data
+data:
+  mongo.conf: |
+    storage:
+      dbPath: /data/db

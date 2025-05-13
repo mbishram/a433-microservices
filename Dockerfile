@@ -19,9 +19,6 @@ RUN npm ci
 # Copy project files
 COPY . .
 
-# Build project
-RUN npm run build
-
 # Expose port 3000
 EXPOSE 3000
 

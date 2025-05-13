@@ -1,0 +1,17 @@
+# IDE folder
+.idea
+
+# Github folder
+.github
+.git
+
+# Github files
+.dockerignore
+.gitignore
+Dockerfile
+
+# node_modules
+node_modules
+
+# README.md file
+README.md

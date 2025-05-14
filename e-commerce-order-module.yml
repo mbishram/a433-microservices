@@ -1,0 +1,60 @@
+# Create order module service
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-module-service
+  namespace: e-commerce # Add it to "e-commerce" namespace
+  labels: # Add a label to make it easy to identify
+    app: e-commerce
+    module: order
+spec:
+  selector: # Match it to pod labes
+    app: e-commerce
+    module: order
+  ports:
+    - port: 3000 # Map port 3000 on host
+      targetPort: order-module # To port named "order-module"
+  type: NodePort
+---
+# Create order module deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-module-deployment
+  namespace: e-commerce # Add it to "e-commerce" namespace
+  labels: # Add a label to make it easy to identify. Label for deployment itself.
+    app: e-commerce
+    module: order
+spec:
+  replicas: 1
+  selector:
+    matchLabels: # Match label to pod labels
+      app: e-commerce
+      module: order
+  template:
+    metadata:
+      labels: # Labels for pod
+        app: e-commerce
+        module: order
+    spec:
+      containers:
+        - name: order
+          image: ghcr.io/mbishram/e-commerce-order-service:latest # Use image from GitHub Packages
+          ports:
+            - containerPort: 3000 # Open port 3000
+              name: order-module # Name it to make it easier to refer to
+          env:
+            - name: AMPQ_USERNAME # Get AMPQ username from secret and set it to env.
+              valueFrom:
+                secretKeyRef:
+                  key: AMPQ_USERNAME
+                  name: secret
+            - name: AMPQ_PASSWORD # Get AMPQ password from secret and set it to env.
+              valueFrom:
+                secretKeyRef:
+                  key: AMPQ_PASSWORD
+                  name: secret
+            - name: AMQP_URL # Create AMQP URL using user and pass from env and rabbitmq cluster dns and port.
+              # NOTE: frameMax=8192 query params given to fix connection error.
+              # Refer to https://medium.com/@krishramani111/fixing-the-frame-max-rabbitmq-connection-error-in-latest-rabbitmq-versions-with-nestjs-4ba4e4f6861c.
+              value: amqp://$(AMPQ_USERNAME):$(AMPQ_PASSWORD)@rabbitmq-cluster:5672?frameMax=8192

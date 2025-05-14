@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Script to apply all k8s configs in order
+kubectl apply -f e-commerce-namespace.yml \
+  -f e-commerce-secret.yml \
+  -f e-commerce-rabbitmq.yml \
+  -f e-commerce-order-module.yml \
+  -f e-commerce-shipping-module.yml \

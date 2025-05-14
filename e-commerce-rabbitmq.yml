@@ -1,0 +1,10 @@
+# Create a RabbitMQ cluster for message broker
+# NOTE: If failure occurs, check if RabbitMQ Kubernetes Operator installed.
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata:
+  name: rabbitmq-cluster
+  namespace: e-commerce # Add it to "e-commerce" namespace
+  labels: # Add a label to make it easy to identify
+    app: e-commerce
+    module: infra # Infra -> Infrastructure

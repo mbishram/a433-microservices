@@ -1,0 +1,7 @@
+# Create namespace for e-commerce
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: e-commerce
+  labels: # Add a label to make it easy to identify
+    app: e-commerce

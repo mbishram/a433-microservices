@@ -5,3 +5,6 @@ metadata:
   name: e-commerce
   labels: # Add a label to make it easy to identify
     app: e-commerce
+    # Enable Istio. NOTE: If failed, remember to install Istio using "default" profile.
+    # https://istio.io/latest/docs/setup/getting-started/
+    istio-injection: enabled

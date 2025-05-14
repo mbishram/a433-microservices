@@ -6,3 +6,4 @@ kubectl apply -f e-commerce-namespace.yml \
   -f e-commerce-rabbitmq.yml \
   -f e-commerce-order-module.yml \
   -f e-commerce-shipping-module.yml \
+  -f e-commerce-gateway.yml

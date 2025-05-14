@@ -54,7 +54,7 @@ spec:
                 secretKeyRef:
                   key: AMPQ_PASSWORD
                   name: secret
-            - name: AMQP_URL # Create AMQP URL using user and pass from env and rabbitmq cluster dns and port.
+            - name: AMQP_URL # Create AMQP URL using user and pass from env and rabbitmq cluster DNS and port.
               # NOTE: frameMax=8192 query params given to fix connection error.
               # Refer to https://medium.com/@krishramani111/fixing-the-frame-max-rabbitmq-connection-error-in-latest-rabbitmq-versions-with-nestjs-4ba4e4f6861c.
               value: amqp://$(AMPQ_USERNAME):$(AMPQ_PASSWORD)@rabbitmq-cluster:5672?frameMax=8192

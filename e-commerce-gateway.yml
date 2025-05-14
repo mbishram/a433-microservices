@@ -1,0 +1,44 @@
+# Create Istio gateway
+apiVersion: networking.istio.io/v1
+kind: Gateway
+metadata:
+  name: gateway
+  namespace: e-commerce # Add it to "e-commerce" namespace
+  labels: # Add a label to make it easy to identify
+    app: e-commerce
+    module: infra # Infra -> Infrastructure
+spec:
+  selector:
+    istio: ingressgateway # Use Istio default ingress gateway. NOTE: Remember to use "default" profile when installing Istio.
+  servers:
+    - hosts:
+        - "*" # Accept all incoming hosts. For minikube, host usually from "127.0.0.1".
+      port:
+        name: http-order # Set the port name to "http-order".
+        number: 80 # Open port 80. Using the default port because Istio default ingress gateway only opened 80 and 443.
+        protocol: HTTP # Using HTTP protocol.
+---
+# Create Istio virtual service. Used to route incoming traffic.
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: virtual-service
+  namespace: e-commerce # Add it to "e-commerce" namespace
+  labels: # Add a label to make it easy to identify
+    app: e-commerce
+    module: infra # Infra -> Infrastructure
+spec:
+  hosts:
+    - "*" # Accept all incoming hosts. For minikube, host usually from "127.0.0.1".
+  gateways:
+    - gateway # Connect virtual service to gateway called "gateway".
+  http:
+    - name: order-module-routes # Set the route name to "order-module-routes".
+      match:
+        - uri:
+            exact: /order # Match traffic with an exact path "/order".
+      route:
+        - destination:
+            host: order-module-service # To order module service DNS.
+            port:
+              number: 3000 # With port 3000.
